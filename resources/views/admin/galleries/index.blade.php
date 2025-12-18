@@ -19,7 +19,7 @@
         <div class="p-4">
             <div class="flex justify-between items-start">
                 <div>
-                    <div class="font-semibold">{{ $g->caption ?? 'Untitled' }}</div>
+                    <div class="font-semibold">{{ $g->title ?? 'Untitled' }}</div>
                     <div class="text-xs text-gray-500">ID #{{ $g->id }} · {{ $g->status }}</div>
                 </div>
                 <div class="text-sm text-gray-600">❤ {{ $g->total_likes }}</div>
@@ -46,7 +46,7 @@
                 @endif
             </div>
             <div class="p-4">
-                <div class="font-semibold">{{ $d->caption ?? 'Untitled' }}</div>
+                <div class="font-semibold">{{ $d->title ?? 'Untitled' }}</div>
                 <div class="text-xs text-gray-500">Request reason: {{ $d->deletion_request_reason }}</div>
                 <form method="POST" action="{{ route('admin.galleries.approve_deletion',$d) }}" class="mt-3">
                     @csrf

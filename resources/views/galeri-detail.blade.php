@@ -3,32 +3,30 @@
 @section('head')
 <style>
     .page-header {
-        margin-bottom: 24px;
+        margin-bottom: 32px;
     }
     .page-title {
         color: #5a2600;
         font-weight: 900;
-        font-size: 2rem;
-        font-style: italic;
+        font-size: 2.5rem;
         margin: 0;
-        line-height: 1.3;
+        line-height: 1.2;
     }
     .detail-wrapper {
         display: flex;
-        gap: 32px;
+        gap: 48px;
         align-items: flex-start;
     }
     .detail-image-section {
-        flex-shrink: 0;
-        width: 400px;
+        flex: 1;
+        max-width: 50%;
     }
     .detail-image {
         width: 100%;
         height: auto;
-        min-height: 480px;
-        object-fit: cover;
         border-radius: 16px;
         box-shadow: 0 8px 32px rgba(90, 38, 0, 0.12);
+        display: block;
     }
     .detail-info-section {
         flex: 1;
@@ -38,17 +36,17 @@
         display: block;
         color: #5a2600;
         font-weight: 700;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-style: italic;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
     }
     .form-input {
         width: 100%;
-        padding: 16px 24px;
+        padding: 18px 24px;
         border-radius: 24px;
         border: none;
         background: #fff;
-        font-size: 1rem;
+        font-size: 1.1rem;
         color: #333;
         box-sizing: border-box;
         margin-bottom: 24px;
@@ -56,12 +54,12 @@
     }
     .form-textarea {
         width: 100%;
-        padding: 16px 24px;
+        padding: 18px 24px;
         border-radius: 24px;
         border: none;
         background: #fff;
-        min-height: 140px;
-        font-size: 1rem;
+        min-height: 150px;
+        font-size: 1.1rem;
         color: #333;
         resize: vertical;
         box-sizing: border-box;
@@ -78,13 +76,32 @@
     .likes-display {
         display: flex;
         align-items: center;
-        gap: 10px;
-        font-size: 1.15rem;
-        color: #333;
+        gap: 12px;
     }
-    .likes-display .heart {
-        font-size: 1.5rem;
+    .like-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background: #fff;
+        border: 2px solid #cfa98a;
+        border-radius: 24px;
+        font-size: 1rem;
         color: #5a2600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .like-btn:hover {
+        background: #fbeee7;
+        border-color: #a04a1a;
+    }
+    .like-btn.liked {
+        background: #a04a1a;
+        border-color: #a04a1a;
+        color: #fff;
+    }
+    .like-btn .heart {
+        font-size: 1.2rem;
     }
     .delete-btn {
         background: #fff;
@@ -165,8 +182,13 @@
         
         <div class="detail-actions">
             <div class="likes-display">
-                <span class="heart">&#9825;</span>
-                <span>{{ number_format($photo->total_likes ?? 0, 0, ',', '.') }} Suka</span>
+                <form method="POST" action="{{ route('galeri.like', $photo->id) }}" id="likeForm">
+                    @csrf
+                    <button type="submit" class="like-btn" id="likeBtn">
+                        <span class="heart">&#9825;</span>
+                        <span id="likeCount">{{ number_format($photo->total_likes ?? 0, 0, ',', '.') }} Suka</span>
+                    </button>
+                </form>
             </div>
             <form method="GET" action="{{ route('galeri.hapus', $photo->id) }}">
                 <button type="submit" class="delete-btn" title="Hapus foto">

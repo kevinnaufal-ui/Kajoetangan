@@ -3,24 +3,20 @@
 @section('head')
 <style>
     .page-header {
-        text-align: center;
         margin-bottom: 32px;
     }
     .page-title {
         color: #5a2600;
         font-weight: 900;
-        font-size: 2rem;
-        font-style: italic;
+        font-size: 2.5rem;
         text-decoration: line-through;
         text-decoration-thickness: 3px;
         opacity: 0.6;
         margin: 0;
-        line-height: 1.3;
+        line-height: 1.2;
     }
     .delete-wrapper {
         position: relative;
-        max-width: 900px;
-        margin: 0 auto;
     }
     .delete-container {
         background: linear-gradient(135deg, #a04a1a, #8b3d15);

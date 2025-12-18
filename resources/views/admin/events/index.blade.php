@@ -18,11 +18,14 @@
                     <div class="text-sm text-gray-500">{{ Str::limit($e->description, 120) }}</div>
                 @endif
             </div>
-            <form method="POST" action="{{ route('admin.events.destroy', $e) }}" class="absolute right-2 top-2" onsubmit="return confirm('Hapus acara ini?');">
-                @csrf
-                @method('DELETE')
-                <button class="bg-red-600 text-white px-2 py-1 rounded text-xs">Hapus</button>
-            </form>
+            <div class="absolute right-2 top-2 flex gap-2">
+                <a href="{{ route('admin.events.edit', $e) }}" class="bg-blue-600 text-white px-2 py-1 rounded text-xs">Edit</a>
+                <form method="POST" action="{{ route('admin.events.destroy', $e) }}" onsubmit="return confirm('Hapus acara ini?');">
+                    @csrf
+                    @method('DELETE')
+                    <button class="bg-red-600 text-white px-2 py-1 rounded text-xs">Hapus</button>
+                </form>
+            </div>
         </li>
     @endforeach
 </ul>

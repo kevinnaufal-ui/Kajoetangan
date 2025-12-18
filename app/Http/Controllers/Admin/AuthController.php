@@ -30,28 +30,7 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'Invalid credentials']);
     }
 
-    public function showRegister()
-    {
-        return view('admin.register');
-    }
 
-    public function register(Request $request)
-    {
-        $data = $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|max:100|unique:admins,email',
-            'password' => 'required|string|min:6',
-        ]);
-        $admin = Admin::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-
-        // Auto-login after register
-        session(['admin_id' => $admin->id, 'admin_name' => $admin->name]);
-        return redirect()->route('admin.dashboard');
-    }
 
     public function logout(Request $request)
     {

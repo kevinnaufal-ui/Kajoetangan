@@ -20,7 +20,9 @@
     @else
         <div class="flex min-h-screen">
             <!-- Sidebar (hidden content on auth pages) -->
-            <aside class="w-64 bg-white border-r hidden lg:block relative">
+            <!-- Sidebar (responsive) -->
+            <div id="sidebar-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
+            <aside id="admin-sidebar" class="w-64 bg-white border-r fixed inset-y-0 left-0 z-50 transform -translate-x-full lg:static lg:translate-x-0 transition-transform duration-200">
                 <div class="p-6">
                     <div class="flex items-center gap-3">
                         <div class="h-10 w-10 bg-indigo-600 text-white rounded flex items-center justify-center">A</div>
@@ -37,7 +39,12 @@
                     <a href="{{ route('admin.articles.index') }}" class="block px-3 py-2 rounded hover:bg-gray-100 {{ request()->routeIs('admin.articles*') ? 'bg-gray-200 font-bold' : '' }}">Artikel</a>
                     <a href="{{ route('admin.galleries.index') }}" class="block px-3 py-2 rounded hover:bg-gray-100 {{ request()->routeIs('admin.galleries*') ? 'bg-gray-200 font-bold' : '' }}">Galeri</a>
                     <a href="{{ route('admin.events.index') }}" class="block px-3 py-2 rounded hover:bg-gray-100 {{ request()->routeIs('admin.events*') ? 'bg-gray-200 font-bold' : '' }}">Acara</a>
-                    <a href="{{ route('admin.bookings.index') }}" class="block px-3 py-2 rounded hover:bg-gray-100 {{ request()->routeIs('admin.bookings*') ? 'bg-gray-200 font-bold' : '' }}">Pesen Tiket</a>
+                    <a href="{{ route('admin.bookings.index') }}" class="block px-3 py-2 rounded hover:bg-gray-100 {{ request()->routeIs('admin.bookings*') ? 'bg-gray-200 font-bold' : '' }} flex justify-between items-center">
+                        Pesen Tiket
+                        @if(isset($pendingBookingCount) && $pendingBookingCount > 0)
+                            <span class="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">{{ $pendingBookingCount }}</span>
+                        @endif
+                    </a>
                     <a href="{{ route('admin.about') }}" class="block px-3 py-2 rounded hover:bg-gray-100 {{ request()->routeIs('admin.about*') ? 'bg-gray-200 font-bold' : '' }}">Tentang</a>
                 </nav>
 
@@ -68,7 +75,9 @@
                 <header class="bg-white border-b">
                     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
                         <div class="flex items-center gap-4">
-                            <button id="mobile-menu-button" class="lg:hidden px-2 py-1 rounded bg-gray-100">Menu</button>
+                            <button id="sidebar-toggle" class="lg:hidden px-2 py-1 rounded bg-gray-100">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                            </button>
                             <div class="text-lg font-semibold">Admin</div>
                         </div>
                         <div class="flex items-center gap-4">
@@ -101,9 +110,20 @@
 
     <script>
         // mobile menu toggle (simple)
-        document.getElementById('mobile-menu-button')?.addEventListener('click', function(){
-            alert('Mobile menu: use sidebar on larger screens');
-        });
+        // mobile menu toggle
+        const btn = document.getElementById('sidebar-toggle');
+        const sidebar = document.getElementById('admin-sidebar');
+        const backdrop = document.getElementById('sidebar-backdrop');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('-translate-x-full');
+            backdrop.classList.toggle('hidden');
+        }
+
+        if(btn){
+            btn.addEventListener('click', toggleSidebar);
+            backdrop.addEventListener('click', toggleSidebar);
+        }
 
         // Modal konfirmasi hapus akun
         function showDeleteModal() {

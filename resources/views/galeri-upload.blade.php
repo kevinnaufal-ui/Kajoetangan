@@ -5,16 +5,14 @@
     .upload-title {
         color: #5a2600;
         font-weight: 900;
-        font-size: 1.5rem;
-        margin-bottom: 24px;
-        text-align: center;
+        font-size: 2.5rem;
+        margin: 0 0 32px 0;
+        line-height: 1.2;
     }
     .upload-container {
         background: linear-gradient(135deg, rgba(160, 74, 26, 0.1), rgba(160, 74, 26, 0.05));
         padding: 40px 32px;
         border-radius: 32px;
-        max-width: 900px;
-        margin: 0 auto;
         box-shadow: 0 8px 32px rgba(90, 38, 0, 0.08);
     }
     .upload-form {
@@ -166,7 +164,10 @@
                 <label class="form-label">Deskripsi</label>
                 <textarea name="caption" required class="form-textarea" placeholder="Tuliskan deskripsi foto..."></textarea>
             </div>
-            <button type="submit" class="upload-btn">Unggah</button>
+            <div style="display: flex; gap: 16px; margin-top: auto; padding-top: 32px; align-self: flex-end; width: 100%; justify-content: space-between;">
+                <a href="{{ route('galeri') }}" class="upload-btn" style="text-decoration: none; text-align: center;">Kembali</a>
+                <button type="submit" class="upload-btn">Unggah</button>
+            </div>
         </div>
     </form>
     <div class="upload-notice">

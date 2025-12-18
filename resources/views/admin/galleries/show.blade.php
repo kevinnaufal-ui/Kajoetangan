@@ -4,7 +4,9 @@
 <h2 class="text-xl font-bold mb-4">Galeri #{{ $gallery->id }}</h2>
 <div class="bg-white p-4 rounded shadow">
     <div class="mb-3"><strong>Uploader:</strong> {{ $gallery->uploader_name ?? $gallery->uploader_email }}</div>
+    <div class="mb-3"><strong>Judul:</strong> {{ $gallery->title ?? '-' }}</div>
     <div class="mb-3"><img src="{{ asset($gallery->image_url) }}" alt="" class="max-w-full h-auto"></div>
+    <div class="mb-3"><strong>Deskripsi:</strong> {{ $gallery->caption ?? '-' }}</div>
     <div class="mb-3"><strong>Likes:</strong> {{ $gallery->total_likes }}</div>
     <div class="mb-3"><strong>Status:</strong> {{ $gallery->status }}</div>
     <form method="POST" action="{{ route('admin.galleries.approve',$gallery) }}">@csrf<button class="text-green-600">Approve</button></form>

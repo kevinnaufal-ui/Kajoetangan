@@ -31,6 +31,7 @@ class GalleryController extends Controller
         $photo = GalleryPhoto::create([
             'uploader_name' => 'Anonim',
             'uploader_email' => '',
+            'title' => $request->title,
             'image_url' => '/storage/' . $path,
             'caption' => $request->caption,
             'status' => 'pending',
@@ -54,5 +55,13 @@ class GalleryController extends Controller
         $photo->deletion_request_reason = $request->reason;
         $photo->save();
         return Redirect::to('/galeri')->with('success', 'Permintaan penghapusan foto telah dikirim, menunggu persetujuan admin.');
+    }
+
+    public function like($id)
+    {
+        $photo = GalleryPhoto::findOrFail($id);
+        $photo->total_likes = ($photo->total_likes ?? 0) + 1;
+        $photo->save();
+        return Redirect::back()->with('success', 'Anda menyukai foto ini!');
     }
 }

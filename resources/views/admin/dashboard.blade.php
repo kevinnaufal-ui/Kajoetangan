@@ -35,7 +35,10 @@
 </div>
 
 <div class="mt-10">
-    <h2 class="text-xl font-bold mb-4">Grafik Kedatangan Pengunjung (Minggu Ini)</h2>
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-bold">Jumlah Pembelian Tiket Online (Minggu Ini)</h2>
+        <a href="{{ route('admin.bookings.index') }}" class="bg-indigo-600 text-white px-4 py-2 rounded shadow hover:bg-indigo-700 font-medium text-sm">Lihat Detail</a>
+    </div>
     <canvas id="bookingChart" height="120"></canvas>
 </div>
 
