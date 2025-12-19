@@ -35,13 +35,4 @@
 		@endforeach
 	</div>
 </div>
-<div class="max-w-2xl flex flex-wrap gap-4 mb-6">
-	@foreach($images as $img)
-		<form method="POST" action="{{ route('admin.history.image.delete', $img->id) }}" onsubmit="return confirm('Hapus gambar ini?');" class="relative group">
-			@csrf
-			<img src="{{ asset($img->image_path) }}" class="w-40 h-28 object-cover rounded border">
-			<button class="absolute top-1 right-1 px-2 py-1 bg-red-600 text-white rounded text-xs opacity-80 group-hover:opacity-100">Hapus</button>
-		</form>
-	@endforeach
-</div>
 @endsection

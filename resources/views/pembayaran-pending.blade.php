@@ -1,6 +1,5 @@
 @extends('layout')
 @section('title', 'Menunggu Pembayaran | Kajoetangan')
-@section('title', 'Menunggu Pembayaran | Kajoetangan')
 @section('head')
 <style>
     .page-title {
